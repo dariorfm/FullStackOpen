@@ -1,8 +1,8 @@
 import React, { useState} from 'react'
 
-const MostVotes = ({votes, anecdotes}) => {
+const MostVotes = ({countVotes, anecdotes}) => {
     const maxVotes = Math.max(...votes)
-    const index = votes.indexOf(maxVotes)
+    const index = countVotes.indexOf(maxVotes)
     return (
         <div>
             <h1>Anecdote with most votes</h1>
