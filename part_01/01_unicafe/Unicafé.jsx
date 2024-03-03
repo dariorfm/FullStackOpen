@@ -1,5 +1,30 @@
 import React, { useState } from 'react'
 
+const Statistics = (props) => {
+
+    const { good, neutral, bad, all, average, positive } = props
+
+    if (all === 0) {
+        return (
+            <div>
+                <h1>Statistics</h1>
+                <p>No feedback given</p>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <h1>Statistics</h1>
+                <p>Good: {good}</p>
+                <p>Neutral: {neutral}</p>
+                <p>Bad: {bad}</p>
+                <p>All: {all}</p>
+                <p>Average: {average}</p>
+                <p>Positive: {positive}%</p>
+            </div>
+        )
+    }
+}
 
 
 const Unicafé = () => {
@@ -12,8 +37,6 @@ const Unicafé = () => {
     const [all, setAll] = useState(0);
     const [average, setAverage] = useState(0);
     const [positive, setPositive] = useState(0);
-
- 
  
     
     
@@ -32,8 +55,6 @@ const Unicafé = () => {
         setAll(good + newNeutral + bad)
         setAverage((good - bad) / (good + newNeutral + bad)) 
         setPositive((good / (good + newNeutral + bad)) * 100)   
-
-        
         
     }
     
@@ -44,8 +65,6 @@ const Unicafé = () => {
         setAverage((good - newBad) / (good + neutral + newBad))
         setPositive((good / (good + neutral + newBad)) * 100)
 
-        
-
     }
     
     
@@ -55,13 +74,7 @@ const Unicafé = () => {
             <button onClick={setToGood}>good</button>
             <button onClick={setToNeutral}>neutral</button>
             <button onClick={setToBad}>bad</button>
-            <h1>Statistics</h1>
-            <p>Good: {good}</p>
-            <p>Neutral: {neutral}</p>
-            <p>Bad: {bad}</p>
-            <p>All: {all}</p>
-            <p>Average: {average}</p>
-            <p>Positive: {positive}%</p>
+            <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive} />
   
         </div>
     )
