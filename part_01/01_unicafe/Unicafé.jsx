@@ -9,21 +9,29 @@ const Unicafé = () => {
     const [good, setGood] = useState(0);
     const [neutral, setNeutral] = useState(0);
     const [bad, setBad] = useState(0);
- 
+    const [all, setAll] = useState(0);
+    const [average, setAverage] = useState(0);
+    const [positive, setPositive] = useState(0);
 
-    
+ 
+ 
     
     
     const setToGood = () => {
         const newGood = good + 1
         setGood(newGood)
-
+        setAll(newGood + neutral + bad)
+        setAverage((newGood - bad) / (newGood + neutral + bad))
+        setPositive((newGood / (newGood + neutral + bad)) * 100)
         
     }
     
     const setToNeutral = () => { 
         const newNeutral = neutral + 1 
         setNeutral(newNeutral)
+        setAll(good + newNeutral + bad)
+        setAverage((good - bad) / (good + newNeutral + bad)) 
+        setPositive((good / (good + newNeutral + bad)) * 100)   
 
         
         
@@ -32,6 +40,9 @@ const Unicafé = () => {
     const setToBad = () => {
         const newBad = bad + 1
         setBad(newBad)
+        setAll(good + neutral + newBad)
+        setAverage((good - newBad) / (good + neutral + newBad))
+        setPositive((good / (good + neutral + newBad)) * 100)
 
         
 
@@ -48,6 +59,9 @@ const Unicafé = () => {
             <p>Good: {good}</p>
             <p>Neutral: {neutral}</p>
             <p>Bad: {bad}</p>
+            <p>All: {all}</p>
+            <p>Average: {average}</p>
+            <p>Positive: {positive}%</p>
   
         </div>
     )
