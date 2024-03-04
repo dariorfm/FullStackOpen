@@ -1,5 +1,6 @@
-
 import { useState } from 'react'
+import Search from "./components/Search"
+
 
 const App = () => {
 
@@ -14,7 +15,7 @@ const App = () => {
   // Hooks for the form
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [searchTerm, setSearchTerm] = useState('')
+
   
   // Event handlers
   const handleNameChange = (event) => {
@@ -27,10 +28,7 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const handleSearchChange = (event) => {
-    console.log(event.target.value)
-    setSearchTerm(event.target.value.toLowerCase())
-  }
+
 
   // Check if the person already exists
   const exists = persons.find(person => person.name === newName)
@@ -53,17 +51,19 @@ const App = () => {
     setNewNumber('')
   }
 
-  // Filter the list of persons based on the search term
-  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchTerm))
+
 
 
   // Display the phonebook
   return (
     <div>
       <h2>Phonebook</h2>
+      
       <div>
-        filter shown with <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search by name" />
+          <Search persons={persons} />
       </div>
+
+
       <form onSubmit={addPerson} >
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
@@ -75,13 +75,10 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
+
+
       <h2>Numbers</h2>
 
-      <ul>
-        {filteredPersons.map((person, index) => (
-          <li key={index}>{person.name} {person.number}</li>
-        ))}
-      </ul>
     </div>
   )
 }
