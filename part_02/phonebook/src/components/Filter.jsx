@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 
-const Search = (props) => {
+const Filter = (props) => {
     
     const persons = props.persons
 
@@ -14,17 +14,23 @@ const Search = (props) => {
 
     // Filter the list of persons based on the search term
     const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchTerm))
+    
 
     return (
     <div>
         filter shown with <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search by name" />
-        <ul>
-            {filteredPersons.map((person, index) => (
-            <li key={index}>{person.name} {person.number}</li>
-            ))}
-        </ul>
+
+        {searchTerm && (
+            <ul>
+                {filteredPersons.map((person, index) => (
+                <li key={index}>
+                    {person.name} {person.number}
+                </li>
+                ))}
+            </ul>
+        )}
     </div>
     )
 }
 
-export default Search
+export default Filter

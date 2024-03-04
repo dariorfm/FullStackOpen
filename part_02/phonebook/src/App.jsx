@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import Search from "./components/Search"
+import Filter from "./components/Filter"
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 
 const App = () => {
@@ -11,48 +13,7 @@ const App = () => {
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
-  
-  // Hooks for the form
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-
-  
-  // Event handlers
-  const handleNameChange = (event) => {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-  
-  const handleNumberChange = (event) => {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
-
-
-
-  // Check if the person already exists
-  const exists = persons.find(person => person.name === newName)
-  
-  // Add a new person to the phonebook
-  const addPerson = (event) => {
-
-    event.preventDefault()
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-    if (exists) {
-      alert(`${newName} is already added to phonebook`)
-      return
-    }
-    setPersons(persons.concat(personObject))
     
-    setNewName('')
-    setNewNumber('')
-  }
-
-
-
 
   // Display the phonebook
   return (
@@ -60,24 +21,14 @@ const App = () => {
       <h2>Phonebook</h2>
       
       <div>
-          <Search persons={persons} />
+          <Filter persons={persons} />
       </div>
 
-
-      <form onSubmit={addPerson} >
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-
-
-      <h2>Numbers</h2>
+      <h3>Add a new</h3>
+      <PersonForm persons={persons} setPersons={setPersons} />
+      
+      <h3>Numbers</h3>
+      <Persons persons={persons} />
 
     </div>
   )
