@@ -1,4 +1,4 @@
-import Course from './courseinfo/Course'
+import Course from './components/Course'
 
 
   
