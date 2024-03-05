@@ -20,6 +20,9 @@ const App = () => {
       })
   }, [])
 
+
+  
+
   // Display the phonebook
   return (
     <div>
@@ -33,7 +36,8 @@ const App = () => {
       <PersonForm persons={persons} setPersons={setPersons} />
       
       <h3>Numbers</h3>
-      <Persons persons={persons} />
+
+      <Persons persons={persons}  setPersons={setPersons}/>
 
     </div>
   )
