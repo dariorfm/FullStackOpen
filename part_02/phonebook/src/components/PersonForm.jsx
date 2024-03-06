@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import axios from 'axios'
 import personService from '../services/persons'
 
 const PersonForm = (props) => {
@@ -22,11 +21,12 @@ const PersonForm = (props) => {
         setNewNumber(event.target.value)
     }
 
-    // Check if the person already exists
-    const exists = persons.find(person => person.name === newName)
-
-    // Add a new person to the phonebook
+    
+    // Add a new or update number 
     const addPerson = (event) => {
+
+        // Check if the person already exists
+        const exists = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
 
         event.preventDefault()
         const personObject = {
@@ -34,19 +34,44 @@ const PersonForm = (props) => {
             number: newNumber
         }
         if (exists) {
-            alert(`${newName} is already added to phonebook`)
-            return
+            if (window.confirm(`${newName} 
+            is already added to phonebook, 
+            replace the old number with a new one?`)) 
+            {
+                const updatedPerson = { ...exists, number: newNumber }   
+                personService
+                .update(updatedPerson.id, updatedPerson)
+                .then(returnedPerson => {
+                    setPersons(
+                        persons.map(person => 
+                        person.id !== exists.id 
+                        ? person 
+                        : returnedPerson
+                    ))
+                    setNewName('')
+                    setNewNumber('')
+
+                })
+                console.log('Edit confirmed')
+                return
+            } else {
+
+                console.log('Edit cancelled') 
+                return
+            }
+           
         }
         personService
-            .create(personObject)
-            .then(returnedPerson => {
-                setPersons(persons.concat(returnedPerson))
-                setNewName('')
-                setNewNumber('')
-            })
-
+        .create(personObject)
+        .then(returnedPerson => {
+            setPersons(persons.concat(returnedPerson))
+            setNewName('')
+            setNewNumber('')
+        })
     
     }
+
+
 
     return (
         <div>
