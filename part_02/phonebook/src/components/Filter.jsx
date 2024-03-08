@@ -1,34 +1,33 @@
-import React, {useState} from 'react'
-
 
 const Filter = (props) => {
     
-    const persons = props.persons
+    const {persons, searchTerm, handleSearchChange} = props
 
-    const [searchTerm, setSearchTerm] = useState('')
-
-    const handleSearchChange = (event) => {
-        console.log(event.target.value)
-        setSearchTerm(event.target.value.toLowerCase())
-    }
+ 
 
     // Filter the list of persons based on the search term
-    const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchTerm))
+    const filteredPersons = persons.filter(person => 
+        person.name.toLowerCase().includes(searchTerm)
+    )
     
 
     return (
     <div>
-        filter shown with <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search by name" />
+        filter shown with 
+        <input 
+            type="text" 
+            value={searchTerm} 
+            onChange={handleSearchChange} 
+            placeholder="Search by name" 
+        />
 
-        {searchTerm && (
-            <ul>
-                {filteredPersons.map((person, index) => (
-                <li key={index}>
+            {searchTerm && (<ul>
+                {filteredPersons.map((person, ind) => (
+                <li key={ind}>
                     {person.name} {person.number}
                 </li>
                 ))}
-            </ul>
-        )}
+            </ul>)}
     </div>
     )
 }
