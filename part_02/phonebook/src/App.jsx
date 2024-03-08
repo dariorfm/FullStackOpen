@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import Filter from "./components/Filter"
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
 import personService from './services/persons'
+import Notification from './components/Norification'
+import Error from './components/Error'
 
 
 const App = () => {
@@ -13,6 +14,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
+  const [confMessage, setConfMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
   
   // Fetch the initial state of the phonebook from the server
   useEffect(() => {
@@ -84,7 +87,16 @@ const addPerson = (event) => {
               setNewName('')
               setNewNumber('')
 
+          }).catch(error => {
+              setErrorMessage(
+                  `Information of ${newName} has already been removed from server`
+              )
+              setTimeout(() => {
+                  setErrorMessage(null)
+              }, 5000)
+              setPersons(persons.filter(person => person.id !== exists.id))
           })
+
           console.log('Edit confirmed')
           return
       } else {
@@ -103,13 +115,14 @@ const addPerson = (event) => {
   })
 
   console.log('Add confirmed')
-
+  setConfMessage(
+    `Added ${newName}`
+    )
+    setTimeout(() => {
+      setConfMessage(null)
+    }, 5000
+    )
 }
-
-
-
-
-
 
 
   
@@ -118,7 +131,9 @@ const addPerson = (event) => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Error errorMessage={errorMessage} />
       
+      <Notification message={confMessage} />
       
       <Filter 
         persons={persons} 
@@ -136,7 +151,10 @@ const addPerson = (event) => {
       
       <h3>Numbers</h3>
 
-      <Persons persons={persons} removePerson={removePerson}  />
+      <Persons 
+        persons={persons} 
+        removePerson={removePerson}  
+      />
 
     </div>
   )

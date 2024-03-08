@@ -1,0 +1,39 @@
+body{
+    background-color: #15163f;
+    font-family: Arial, sans-serif;
+    margin-left: 50px;
+    padding: 0;
+    box-sizing: border-box;
+    color: wheat;
+}
+
+button{
+    background-color: #812c2c;
+    color: #d2d2d3;
+    padding: 3px 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.confMessage {
+    color: rgb(23, 163, 228);
+    background: rgb(54, 50, 50);
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .errorMessage {
+    color: rgb(228, 37, 23);
+    background: rgb(54, 50, 50);
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
