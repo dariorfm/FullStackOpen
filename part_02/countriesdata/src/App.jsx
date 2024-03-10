@@ -33,6 +33,7 @@ function App() {
          countries={countries}
          searchCountry={searchCountry}
          handleSearch={handleSearch}
+         setSearchCountry={setSearchCountry}
         />
       </div>
     </>

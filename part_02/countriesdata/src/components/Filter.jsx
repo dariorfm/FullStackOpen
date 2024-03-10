@@ -1,13 +1,14 @@
 
 
 const Filter = (props) => {
-    const { countries, searchCountry, handleSearch } = props
+    const { countries, searchCountry, handleSearch, setSearchCountry} = props
 
     const foundCountry = countries.filter(country =>
         country.name.common.toLowerCase().includes(searchCountry.toLowerCase())
     )
 
-    console.log(foundCountry.length)
+    //console.log(foundCountry.length)
+
 
 
 
@@ -20,7 +21,6 @@ const Filter = (props) => {
                 onChange={handleSearch}
                 placeholder="Search by name"
             />
-            
 
             <p>
                   {searchCountry && foundCountry.length > 10
@@ -30,12 +30,14 @@ const Filter = (props) => {
                 
             </p>
 
-            
+
             <div>
                 {searchCountry && foundCountry.length <= 10 && foundCountry.length > 1 && 
                 (foundCountry.map((country, ind) => (
                     <li key={ind}>
                         {country.name.common}
+                        <button onClick={ () => setSearchCountry(country.name.common)
+                        }>Show</button> 
                     </li>
                 )))}
                 
