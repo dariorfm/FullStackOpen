@@ -26,7 +26,7 @@ function App() {
 
 
   useEffect(() => {
-    if (searchCountry !== '' && searchCountry.length > 3) {
+    if (searchCountry !== '' && searchCountry.length > 1) {
       axios
       .get(`http://api.weatherapi.com/v1/current.json?key=${METEO_API_KEY}&q=${searchCountry}`)
       .then(response => {
@@ -35,7 +35,7 @@ function App() {
     }
   }, [searchCountry])
   
-  console.log(weather.location)
+  console.log(weather)
   
   const handleSearch = (event) => {
     setSearchCountry(event.target.value)

@@ -58,6 +58,11 @@ const Filter = (props) => {
                                 ))}
                             </ul>
                             <img src={country.flags.png} alt="Flag" width="150" height="100" />
+                            <h3>Weather in {country.capital}</h3>
+                            <p>Temperature: {props.weather.current.temp_c} Celsius</p>
+                            <img src={props.weather.current.condition.icon} alt="Weather" />
+                            <p>Wind: {props.weather.current.wind_kph} kph, direction {props.weather.current.wind_dir}</p>
+                            
                         </div>
                     ))
                     )}
