@@ -116,15 +116,23 @@ const App = () => {
         setNewName('')
         setNewNumber('')
     })
+    .catch(error => {
+        setErrorMessage(error.response.data.error)
+        setTimeout(() => {
+            setErrorMessage(null)
+        }, 5000)
+    })
 
-    console.log('Add confirmed')
-    setConfMessage(
-      `Added ${newName}`
+    if (newName.length >= 3) {
+      console.log('Add confirmed')
+      setConfMessage(
+        `Added ${newName}`
+        )
+        setTimeout(() => {
+          setConfMessage(null)
+        }, 5000
       )
-      setTimeout(() => {
-        setConfMessage(null)
-      }, 5000
-      )
+    }
   }
 
 
