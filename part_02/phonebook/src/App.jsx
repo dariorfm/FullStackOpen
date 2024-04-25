@@ -123,7 +123,7 @@ const App = () => {
         }, 5000)
     })
 
-    if (newName.length >= 3 && newNumber.length >= 8) {
+    if (newName.length >= 3 && /\d{2,3}-\d/.test(newNumber)) {
       console.log('Add confirmed')
       setConfMessage(
         `Added ${newName}`
