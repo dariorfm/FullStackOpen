@@ -2,6 +2,7 @@
 
 const PersonForm = (props) => {
 
+    // eslint-disable-next-line react/prop-types
     const{addPerson, newName, newNumber, handleNameChange, handleNumberChange } = props
 
     

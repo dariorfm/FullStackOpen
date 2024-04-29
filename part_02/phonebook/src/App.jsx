@@ -90,6 +90,7 @@ const App = () => {
                 setNewNumber('')
 
             }).catch(error => {
+                console.error(error)
                 setErrorMessage(
                     `Information of ${newName} has already been removed from server`
                 )
